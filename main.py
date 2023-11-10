@@ -3,7 +3,8 @@ import os
 
 from dotenv import load_dotenv
 
-# init
+from fastapi import FastAPI
+
 # load env
 load_dotenv()
 
@@ -11,5 +12,11 @@ load_dotenv()
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
-print(client_id)
-print(client_secret)
+# init
+# init web application
+app = FastAPI()
+
+@app.get("/")
+def index():
+    return "Hello World"
+

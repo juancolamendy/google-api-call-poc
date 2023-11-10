@@ -33,3 +33,8 @@ Read more [Google OAuth Documentation](https://developers.google.com/my-business
 ```sh
 pip install -r requirements.txt
 ```
+
+## Run
+```sh
+gunicorn main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker
+```
