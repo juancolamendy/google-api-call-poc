@@ -6,3 +6,5 @@ fastapi
 gunicorn
 pydantic
 uvicorn
+starlette
+itsdangerous

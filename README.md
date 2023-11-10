@@ -2,12 +2,13 @@
 ## Setting Up a Project in Google Cloud Platform
 - Sign in to Google Cloud Console
 - Create a New Project
-- Select the Project:
+- Select the Project
 
 ## Enabling the API
 - Access the API Library: From the main dashboard of your project, click on the "API & Services" > "Library".
-- Search for the API: In the API Library, use the search bar to find "My Business Business Information API".
-- Enable the API: Click on the API from the search results, and then click the "Enable" button to enable it for your project.
+- Search for the API: In the API Library, use the search bar to find "Google Business Profile API".
+- Enable the API
+  - Click on the API from the search results, and then click the "Enable" button to enable it for your project.
 
 ## Set Up OAuth 2.0 on Google Cloud Console
 - Configure OAuth Consent Screen:
