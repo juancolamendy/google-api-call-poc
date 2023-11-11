@@ -131,6 +131,28 @@ async def check_login_status(request: Request):
 
     return {"loggedIn": is_logged_in}
 
+@app.get("/list-accounts")
+async def list_gmb_accounts(request: Request):
+    # retrieve the saved credentials for the user from the session
+    credentials_dict = request.session.get('credentials')
+    if not credentials_dict:
+        raise HTTPException(status_code=401, detail="User is not authenticated")
+
+    # build credentials
+    credentials = Credentials(**credentials_dict)
+    if credentials.expired:
+        credentials.refresh(GoogleRequest())
+
+    # build api client
+    apiClient = build('mybusinessaccountmanagement', 'v1', credentials=credentials)
+    try:
+        # get list of accounts
+        response = apiClient.accounts().list().execute()
+        print('list account response:', response)
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/reviews/{account_id}/{location_id}")
 async def get_reviews(account_id: str, location_id: str, request: Request):
     # retrieve the saved credentials for the user from the session
