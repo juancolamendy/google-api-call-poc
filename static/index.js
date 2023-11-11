@@ -1,5 +1,17 @@
 document.getElementById('loginButton').addEventListener('click', function() {
-    window.location.href = 'http://localhost:8000/login';
+    // Make an AJAX request to your backend
+    fetch('http://localhost:8000/check-login-status')
+        .then(response => response.json())
+        .then(data => {
+            if (data.loggedIn) {
+                // If logged in, hide login button and show fetchReviewsButton
+                handleLoginResponse(true);
+            } else {
+                // If not logged in, redirect to login page
+                window.location.href = 'http://localhost:8000/login';
+            }
+        })
+        .catch(error => console.error('Error:', error));
 });
 
 function handleLoginResponse(loggedIn) {
@@ -9,6 +21,10 @@ function handleLoginResponse(loggedIn) {
     }
 }
 
-// Mocking a response from the backend, replace this with an actual check
-// For example, you can make an AJAX request to your backend to check if the user is logged in
-handleLoginResponse(false);  // Assuming user is not logged in initially
+// Check login status on page load
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('http://localhost:8000/check-login-status')
+        .then(response => response.json())
+        .then(data => handleLoginResponse(data.loggedIn))
+        .catch(error => console.error('Error:', error));
+});
